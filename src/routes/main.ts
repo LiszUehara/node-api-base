@@ -1,7 +1,17 @@
-import { Router } from 'express';
+import { Router, Response, Request } from 'express'
+import { CreateListController } from '../controllers/CreateListController'
+import { DetailListController } from '../controllers/DetailsListController';
+import { UpdateListController } from '../controllers/UpdateListService';
+import { FinishListController } from '../controllers/DeleteListController';
+import { TudoListController } from '../controllers/TudoListaController';
 
-export const mainRouter = Router();
+const router = Router();
 
-mainRouter.get('/ping', (req, res) => {
-    res.json({ pong: true });
-});
+router.post('/criar', new CreateListController().handle)
+router.get('/detalhes', new DetailListController().handle)
+router.put('/atualizar', new UpdateListController().handle)
+router.delete('/deletar/:id', new FinishListController().handle)
+router.get('/tudo', new TudoListController().handle)
+
+export { router };
+
